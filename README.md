@@ -1,8 +1,7 @@
 # Matrix-Calculator Made By Dan Fabian
 This project contains full classes for both Fractions and Matricies to use in the calculator.
-The matrix class has optimizations such as multi threading for multiplication, a special Row
-Echelon function for square matrices that heavily decreases the run time of finding inverses
-and determinants.
+The matrix class has optimizations such as multi threading for multiplication and uses
+the fastest methods for calculating determinants and answers to linear equations.
 
 ## File Contents
   - "Calculator.h" contains all the calculator UI and linear equation solving functions
