@@ -561,7 +561,7 @@ void solveDeterminant<complex<Fraction<int>>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Determinant: " << determinant << endl;
+	cout << "Determinant, output is in the form (real, imaginary): " << determinant << endl;
 
 	outputComputationTime(t1, t2);
 }
@@ -581,7 +581,7 @@ void solveDeterminant<complex<double>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Determinant: " 
+	cout << "Determinant, output is in the form (real, imaginary): " 
 		<< determinant.real() << " + " << determinant.imag() << 'i' 
 		<< endl;
 
@@ -783,7 +783,7 @@ void solveTranspose<complex<Fraction<int>>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	mat.print();
 
 	outputComputationTime(t1, t2);
@@ -804,7 +804,7 @@ void solveTranspose<complex<double>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	mat.print();
 
 	outputComputationTime(t1, t2);
@@ -863,7 +863,7 @@ void solveMultiply<complex<Fraction<int>>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -892,7 +892,7 @@ void solveMultiply<complex<double>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -944,7 +944,7 @@ void solveScalar<complex<Fraction<int>>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -971,7 +971,7 @@ void solveScalar<complex<double>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -1014,7 +1014,7 @@ void solveRowEchelon<complex<Fraction<int>>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Row Echelon Form: " << endl;
+	cout << "Row Echelon Form, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -1035,7 +1035,7 @@ void solveRowEchelon<complex<double>>()
 	auto t2 = Clock::now();
 
 	// print answer
-	cout << "Row Echelon Form: " << endl;
+	cout << "Row Echelon Form, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -1124,7 +1124,7 @@ void solveAdd<complex<Fraction<int>>>()
 	}
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -1168,7 +1168,7 @@ void solveAdd<complex<double>>()
 	}
 
 	// print answer
-	cout << "Answer: " << endl;
+	cout << "Answer, output is in the form (real, imaginary): " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
