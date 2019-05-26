@@ -1,4 +1,4 @@
-# Matrix-Calculator
+# Matrix-Calculator Made By Dan Fabian
 This project contains full classes for both Fractions and Matricies to use in the calculator.
 The matrix class has optimizations such as multi threading for multiplication, a special Row
 Echelon function for square matrices that heavily decreases the run time of finding inverses
@@ -22,3 +22,6 @@ All the calculator UI functions are located in "Calculator.h".
   - multiply two matrices
   - scalar multiplication
   - add/subtract two matrices
+
+## Notes
+  - Matrix and Fraction classes are both templated for any type of number
