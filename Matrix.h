@@ -60,34 +60,33 @@ public:
 	Matrix<T>  operator+  ()                    const { return *this; }
 
 	// methods
-	void                       print             ()                   const; // prints all cells
-	void                       swap              (Matrix<T> & mat);           // constant time swap
-	size_t                     getRows           ()                   const { return rows_; }
-	size_t                     getCols           ()                   const { return cols_; }
-	void                       multiplyRow       (size_t row, T val);        // multiplies each element in row by val
-	void                       addRow            (size_t row, T val);        // adds a val to each element in row
-	void                       rowOp             (size_t row, size_t rowToChange, T val);
-	void                       rowSwap           (size_t row1, size_t row2); // swaps two rows
-	void                       transpose         ();                         // transposes matrix
-	Matrix<T>                  subMatrix         (size_t rowBegin, size_t rowEnd, size_t colBegin, size_t colEnd) const;
-	Matrix<T>                  rowEchelon        ()                   const; // optimized for square matrices, returns matrix in row Echelon form
-	Matrix<T>                  rowEchelonAnySize ()                   const; // returns matrix in row Echelon form
-	pair<Matrix<T>, Matrix<T>> rowEchelon        (Matrix<T> ans)      const; // returns matrix in row Echelon form with an answers matrix
-	T                          determinant       ()                   const; // calcs determinant with row echelon
-	Matrix<T>                  inverse           ()                   const; // finds inverse of square matrix
-	size_t                     rank              ()                   const; // finds rank of matrix
+	void                       print       ()                   const; // prints all cells
+	void                       swap        (Matrix<T> & mat);           // constant time swap
+	size_t                     getRows     ()                   const { return rows_; }
+	size_t                     getCols     ()                   const { return cols_; }
+	void                       multiplyRow (size_t row, T val);        // multiplies each element in row by val
+	void                       addRow      (size_t row, T val);        // adds a val to each element in row
+	void                       rowOp       (size_t row, size_t rowToChange, T val);
+	void                       rowSwap     (size_t row1, size_t row2); // swaps two rows
+	void                       transpose   ();                         // transposes matrix
+	Matrix<T>                  subMatrix   (size_t rowBegin, size_t rowEnd, size_t colBegin, size_t colEnd) const;
+	Matrix<T>                  rowEchelon  ()                   const; // returns matrix in row Echelon form
+	pair<Matrix<T>, Matrix<T>> rowEchelon  (Matrix<T> ans)      const; // returns matrix in row Echelon form with an answers matrix
+	T                          determinant ()                   const; // calcs determinant with row echelon
+	Matrix<T>                  inverse     ()                   const; // finds inverse of square matrix
+	size_t                     rank        ()                   const; // finds rank of matrix
 
 	// friends
 	template <typename K>
-	friend bool      checkDimSame(const Matrix<K> & left, const Matrix<K> & right);
+	friend bool      checkDimSame     (const Matrix<K> & left, const Matrix<K> & right);
 	template <typename K>
-	friend bool      checkDimMultiply(const Matrix<K> & left, const Matrix<K> & right);
+	friend bool      checkDimMultiply (const Matrix<K> & left, const Matrix<K> & right);
 	template <typename K>
 	friend Matrix<K> operator*        (const K & left, const Matrix<K> & right);
 	template <typename K>
 	friend Matrix<K> operator+        (const K & left, const Matrix<K> & right);
 	template <typename K>
-	friend Matrix<K> operator-        (const K& left, const Matrix<K>& right);
+	friend Matrix<K> operator-        (const K & left, const Matrix<K> & right);
 
 private:
 	vector<vector<T>> cells_;
@@ -426,44 +425,8 @@ Matrix<T> Matrix<T>::subMatrix(size_t rowBegin, size_t rowEnd, size_t colBegin, 
 
 ////////////////////////////////////////
 // returns matrix in row Echelon form, need to use a type that is able to work with fractional parts
-// this version is optimized for square matrices
 template <typename T>
 Matrix<T> Matrix<T>::rowEchelon() const
-{
-	// must be square
-	assert(rows_ == cols_);
-
-	// make sure the matrix isn't just 0's
-	assert((*this) != Matrix<T>(rows_, cols_, T(0)));
-
-	Matrix<T> result(*this);
-	for (size_t i = 0; i != rows_; ++i)
-	{
-		// check if rows need to be swapped
-		// if leading term is 0, search through all rows to find a leading term not 0
-		size_t j = i;
-		for (; j != rows_ && result[j][i] == T(0); ++j) {}
-
-		// check if j reached the end of all rows, then matrix can't be solved so throw error
-		if (j == rows_) return result;
-
-		// then swap
-		result.rowSwap(i, j); // if i == j, nothing happens
-
-		for (size_t row = i + 1; row != rows_; ++row)
-		{
-			T rowMultiplier = (result[row][i] / result[i][i]) * T(-1);
-			result.rowOp(i, row, rowMultiplier);
-		}
-	}
-
-	return result;
-}
-
-////////////////////////////////////////
-// returns matrix in row Echelon form, need to use a type that is able to work with fractional parts
-template <typename T>
-Matrix<T> Matrix<T>::rowEchelonAnySize() const
 {
 	// make sure the matrix isn't just 0's
 	assert((*this) != Matrix<T>(rows_, cols_, T(0)));
@@ -555,23 +518,31 @@ T Matrix<T>::determinant() const
 	for (size_t i = 0; i != rows_; ++i)
 	{
 		// check if rows need to be swapped
-		// if leading term is 0, search through all rows to find a leading term not 0
-		size_t j = i;
-		for (; j != rows_ && result[j][i] == T(0); ++j) {}
+		// also search through all rows and columns to find a leading term 
+		size_t leadingTerm = cols_ - 1;
+		size_t rowToSwap = i;
+		bool termFound = false;
+		for (size_t j = i; j != cols_ && !termFound; ++j)
+			for (size_t k = i; k != rows_ && !termFound; ++k)
+				if (j <= leadingTerm && result[k][j] != T(0)) // if leading term found
+				{
+					termFound = true;
+					leadingTerm = j;
+					rowToSwap = k;
+				}
 
-		// then we are done so exit loop
-		if (j == rows_) break;
-
-		// then swap
-		if (i != j)
+		// then swap rows if needed
+		if (i != rowToSwap)
 		{
 			determ *= T(-1);
-			result.rowSwap(i, j);
+			result.rowSwap(i, rowToSwap);
 		}
+
+		if (result[i][leadingTerm] == T(0)) break;
 
 		for (size_t row = i + 1; row != rows_; ++row)
 		{
-			T rowMultiplier = (result[row][i] / result[i][i]) * T(-1);
+			T rowMultiplier = (result[row][leadingTerm] / result[i][leadingTerm]) * T(-1);
 			result.rowOp(i, row, rowMultiplier);
 		}
 	}
@@ -625,7 +596,7 @@ Matrix<T> Matrix<T>::inverse() const
 template <typename T>
 size_t Matrix<T>::rank() const
 {
-	Matrix<T> origReduced = this->rowEchelonAnySize();
+	Matrix<T> origReduced = this->rowEchelon();
 	size_t rank = 0;
 	for (; rank != origReduced.getRows(); ++rank)
 	{
@@ -675,7 +646,7 @@ Matrix<T> operator+(const T & left, const Matrix<T> & right)
 ////////////////////////////////////////
 // allows for subtracting by numbers in different orders
 template <typename T>
-Matrix<T> operator-(const T& left, const Matrix<T>& right)
+Matrix<T> operator-(const T & left, const Matrix<T> & right)
 {
 	return (right - left) * T(-1);
 }

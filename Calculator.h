@@ -989,20 +989,8 @@ void solveRowEchelon()
 
 	// solve
 	auto t1 = Clock::now();
-	Matrix<T> result;
+	Matrix<T> result = mat.rowEchelon();
 	auto t2 = Clock::now();
-	if (mat.getRows() == mat.getCols()) // if square
-	{
-		t1 = Clock::now();
-		result = mat.rowEchelon();
-		t2 = Clock::now();
-	}
-	else
-	{
-		t1 = Clock::now();
-		result = mat.rowEchelonAnySize();
-		t2 = Clock::now();
-	}
 
 	// print answer
 	cout << "Row Echelon Form: " << endl;
@@ -1022,20 +1010,8 @@ void solveRowEchelon<complex<Fraction<int>>>()
 
 	// solve
 	auto t1 = Clock::now();
-	Matrix<T> result;
+	Matrix<T> result = mat.rowEchelon();
 	auto t2 = Clock::now();
-	if (mat.getRows() == mat.getCols()) // if square
-	{
-		t1 = Clock::now();
-		result = mat.rowEchelon();
-		t2 = Clock::now();
-	}
-	else
-	{
-		t1 = Clock::now();
-		result = mat.rowEchelonAnySize();
-		t2 = Clock::now();
-	}
 
 	// print answer
 	cout << "Row Echelon Form: " << endl;
@@ -1055,20 +1031,8 @@ void solveRowEchelon<complex<double>>()
 
 	// solve
 	auto t1 = Clock::now();
-	Matrix<T> result;
+	Matrix<T> result = mat.rowEchelon();
 	auto t2 = Clock::now();
-	if (mat.getRows() == mat.getCols()) // if square
-	{
-		t1 = Clock::now();
-		result = mat.rowEchelon();
-		t2 = Clock::now();
-	}
-	else
-	{
-		t1 = Clock::now();
-		result = mat.rowEchelonAnySize();
-		t2 = Clock::now();
-	}
 
 	// print answer
 	cout << "Row Echelon Form: " << endl;
