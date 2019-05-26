@@ -3,7 +3,12 @@ This project contains full classes for both Fractions and Matricies to use in th
 The matrix class has optimizations such as multi threading for multiplication, a special Row
 Echelon function for square matrices that heavily decreases the run time of finding inverses
 and determinants.
-All the calculator UI functions are located in "Calculator.h".
+
+## File Contents
+  - "Calculator.h" contains all the calculator UI and linear equation solving functions
+  - "Matrix.h" contains templated Matrix class and implementation
+  - "Fraction" contains templated Fraction class and implementation
+  - "main.cpp" contains main function...
 
 ## Calculator Can Work With:
   - Rational numbers
