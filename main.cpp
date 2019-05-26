@@ -6,22 +6,9 @@
 // DATE:        5/25/2019
 
 #include "Calculator.h" // contains all needed headers
-#include "test_rowEchelon.h"
-#include "test_solve.h"
-
-void runTests()
-{
-	// TESTS
-	test_rowEchelon();
-	test_solve();
-
-	cout << "ALL TESTS COMPLETE" << endl;
-}
 
 int main()
 {
-	//runTests();
-
 	cout << "ULTIMATE MATRIX CALCULATOR" << endl << endl;
 
 	// main loop
