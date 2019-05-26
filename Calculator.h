@@ -898,6 +898,9 @@ void solveMultiply<complex<double>>()
 	outputComputationTime(t1, t2);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+// SCALAR MULTIPLICATION CALCULATOR UI FUNCTIONS
 ////////////////////////////////////////
 // scalar multiplication solver UI 
 template <typename T>
@@ -969,6 +972,106 @@ void solveScalar<complex<double>>()
 
 	// print answer
 	cout << "Answer: " << endl;
+	result.print();
+
+	outputComputationTime(t1, t2);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// ROW ECHELON CALCULATOR UI FUNCTIONS
+////////////////////////////////////////
+// row echelon solver UI
+template <typename T>
+void solveRowEchelon()
+{
+	Matrix<T> mat = input<T>(false);
+
+	// solve
+	auto t1 = Clock::now();
+	Matrix<T> result;
+	auto t2 = Clock::now();
+	if (mat.getRows() == mat.getCols()) // if square
+	{
+		t1 = Clock::now();
+		result = mat.rowEchelon();
+		t2 = Clock::now();
+	}
+	else
+	{
+		t1 = Clock::now();
+		result = mat.rowEchelonAnySize();
+		t2 = Clock::now();
+	}
+
+	// print answer
+	cout << "Row Echelon Form: " << endl;
+	result.print();
+
+	outputComputationTime(t1, t2);
+}
+
+////////////////////////////////////////
+// row echelon solver UI rational complex specialization
+template <>
+void solveRowEchelon<complex<Fraction<int>>>()
+{
+	typedef complex<Fraction<int>> T;
+
+	Matrix<T> mat = input<T>(false);
+
+	// solve
+	auto t1 = Clock::now();
+	Matrix<T> result;
+	auto t2 = Clock::now();
+	if (mat.getRows() == mat.getCols()) // if square
+	{
+		t1 = Clock::now();
+		result = mat.rowEchelon();
+		t2 = Clock::now();
+	}
+	else
+	{
+		t1 = Clock::now();
+		result = mat.rowEchelonAnySize();
+		t2 = Clock::now();
+	}
+
+	// print answer
+	cout << "Row Echelon Form: " << endl;
+	result.print();
+
+	outputComputationTime(t1, t2);
+}
+
+////////////////////////////////////////
+// row echelon solver UI rational complex specialization
+template <>
+void solveRowEchelon<complex<double>>()
+{
+	typedef complex<double> T;
+
+	Matrix<T> mat = input<T>(false);
+
+	// solve
+	auto t1 = Clock::now();
+	Matrix<T> result;
+	auto t2 = Clock::now();
+	if (mat.getRows() == mat.getCols()) // if square
+	{
+		t1 = Clock::now();
+		result = mat.rowEchelon();
+		t2 = Clock::now();
+	}
+	else
+	{
+		t1 = Clock::now();
+		result = mat.rowEchelonAnySize();
+		t2 = Clock::now();
+	}
+
+	// print answer
+	cout << "Row Echelon Form: " << endl;
 	result.print();
 
 	outputComputationTime(t1, t2);
@@ -1123,6 +1226,7 @@ void calcSelector(size_t calcSelection)
 	else if (calcSelection == 5) solveTranspose<T>();
 	else if (calcSelection == 6) solveMultiply<T>();
 	else if (calcSelection == 7) solveScalar<T>();
+	else if (calcSelection == 8) solveRowEchelon<T>();
 	else                         solveAdd<T>();
 }
 #endif // SOLVER_H
