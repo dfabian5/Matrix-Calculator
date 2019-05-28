@@ -54,7 +54,7 @@ public:
 	Fraction<T>  operator/ (Fraction<T> rhs)         const; // division
 	Fraction<T>  operator^ (const Fraction<T> & rhs) const; // powers
 
-	// unary operators
+	// compound assignment and unary operators
 	Fraction<T>& operator+= (const Fraction & rhs)      { *this = *this + rhs; return *this; }
 	Fraction<T>& operator*= (const Fraction & rhs)      { *this = *this * rhs; return *this; }
 	Fraction<T>& operator-= (const Fraction & rhs)      { *this = *this - rhs; return *this; }
