@@ -48,7 +48,7 @@ public:
 	bool       operator== (const Matrix<T> & rhs) const;
 	bool       operator!= (const Matrix<T> & rhs) const;
 
-	// unary operators
+	// compound assignment and unary operators
 	Matrix<T>& operator+= (const Matrix<T> & rhs)     { *this = *this + rhs; return *this; }
 	Matrix<T>& operator+= (const T & rhs)             { *this = *this + rhs; return *this; }
 	Matrix<T>& operator*= (const Matrix<T> & rhs)     { *this = *this * rhs; return *this; }
