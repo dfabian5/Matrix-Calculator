@@ -29,4 +29,3 @@ the fastest methods for calculating determinants and answers to linear equations
 
 ## Notes
   - Matrix and Fraction classes are both templated for any type of number
-  - There is no max size of matricies, the only limitation is your system architecture
