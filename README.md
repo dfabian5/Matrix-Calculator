@@ -1,4 +1,4 @@
-# Matrix-Calculator Made By Dan Fabian
+# Matrix-Calculator
 This project contains full classes for both Fractions and Matricies to use in the calculator.
 The matrix class has optimizations such as multi threading for multiplication and uses
 the fastest methods for calculating determinants and answers to linear equations.
