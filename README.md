@@ -26,6 +26,3 @@ the fastest methods for calculating determinants and answers to linear equations
   - multiply two matrices
   - scalar multiplication
   - add/subtract two matrices
-
-## Notes
-  - Matrix and Fraction classes are both templated for any type of number
